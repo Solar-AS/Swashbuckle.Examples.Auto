@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{39D82114-179
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Examples.Auto", "src\Swashbuckle.Examples.Auto\Swashbuckle.Examples.Auto.csproj", "{30FD8233-958A-4613-A61B-6E82FBF78205}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{84576930-D6B6-4E9F-8BF7-5C66C8CF78B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Examples.Auto.Tests", "tests\Swashbuckle.Examples.Auto.Tests\Swashbuckle.Examples.Auto.Tests.csproj", "{D77F2B21-0536-4F87-B014-35810D1E1AC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{30FD8233-958A-4613-A61B-6E82FBF78205}.Release|x64.Build.0 = Release|x64
 		{30FD8233-958A-4613-A61B-6E82FBF78205}.Release|x86.ActiveCfg = Release|x86
 		{30FD8233-958A-4613-A61B-6E82FBF78205}.Release|x86.Build.0 = Release|x86
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Debug|x64.ActiveCfg = Debug|x64
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Debug|x64.Build.0 = Debug|x64
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Debug|x86.ActiveCfg = Debug|x86
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Debug|x86.Build.0 = Debug|x86
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Release|x64.ActiveCfg = Release|x64
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Release|x64.Build.0 = Release|x64
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Release|x86.ActiveCfg = Release|x86
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{30FD8233-958A-4613-A61B-6E82FBF78205} = {39D82114-1798-47B5-BEA2-44F9BF0CE01C}
+		{D77F2B21-0536-4F87-B014-35810D1E1AC5} = {84576930-D6B6-4E9F-8BF7-5C66C8CF78B2}
 	EndGlobalSection
 EndGlobal
