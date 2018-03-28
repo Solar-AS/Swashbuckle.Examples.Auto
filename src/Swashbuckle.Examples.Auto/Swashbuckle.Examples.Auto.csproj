@@ -12,6 +12,11 @@
 	<DefineConstants>NET46; NET</DefineConstants>
   </PropertyGroup>
 
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+	<DocumentationFile>bin\Release\$(TargetFramework)\Swashbuckle.Examples.Auto.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(TargetFramework)'=='net46'">
 	<PackageReference Include="Swashbuckle.Core">
 	  <Version>5.6.0</Version>
