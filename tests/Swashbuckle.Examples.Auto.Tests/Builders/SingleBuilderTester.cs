@@ -4,6 +4,7 @@ using System.Reflection;
 using AutoFixture.Kernel;
 using NUnit.Framework;
 using Swashbuckle.Examples.Auto.Builders;
+using Swashbuckle.Examples.Auto.Tests.Builders.Support;
 
 namespace Swashbuckle.Examples.Auto.Tests.Builders
 {
@@ -20,40 +21,36 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 			Assert.That(noOp, Is.InstanceOf<NoSpecimen>());
 		}
 
-		// ReSharper disable MemberCanBePrivate.Local
-		// ReSharper disable UnusedAutoPropertyAccessor.Local
-		class C
-		{
-			public int NotDecorated { get; set; }
-			
-			[Sample("a", "b")]
-			public List<string> Unhandled { get; set; }
 
-			[Sample("a")]
-			public int TypeMismatch { get; set; }
+		// ReSharper disable UnusedAutoPropertyAccessor.Global
+		// ReSharper disable UnusedMember.Global
+		// ReSharper disable MemberCanBePrivate.Global
 
-			[Sample("1")]
-			public int CompatibleConversion { get; set; }
+		public int NotDecorated { get; set; }
 
-			[Sample('a')]
-			
-			public char ExactType { get; set; }
+		[Sample("a", "b")]
+		public List<string> Unhandled { get; set; }
 
-			internal static PropertyInfo Prop(string name)
-			{
-				PropertyInfo property = typeof(C).GetProperty(name);
-				return property;
-			}
-		}
-		// ReSharper restore MemberCanBePrivate.Local
-		// ReSharper restore UnusedAutoPropertyAccessor.Local
+		[Sample("a")]
+		public int TypeMismatch { get; set; }
+
+		[Sample("1")]
+		public int CompatibleConversion { get; set; }
+
+		[Sample('a')]
+		public char ExactType { get; set; }
+
+		// ReSharper restore MemberCanBePrivate.Global
+		// ReSharper restore UnusedMember.Global
+		// ReSharper restore UnusedAutoPropertyAccessor.Global
+
 
 		[Test]
 		public void Create_PropertyNotDecorated_NoOp()
 		{
 			var subject = new SingleBuilder();
 
-			PropertyInfo notDecorated = typeof(C).GetProperty(nameof(C.NotDecorated));
+			PropertyInfo notDecorated = this.Property(nameof(NotDecorated));
 			var noOp = subject.Create(notDecorated, null);
 
 			Assert.That(noOp, Is.InstanceOf<NoSpecimen>());
@@ -63,7 +60,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		public void Create_PropertyOfUnsupportedType_NoOp()
 		{
 			var subject = new SingleBuilder();
-			PropertyInfo unhandledType = C.Prop(nameof(C.Unhandled));
+			PropertyInfo unhandledType = this.Property(nameof(Unhandled));
 
 			var noOp = subject.Create(unhandledType, null);
 
@@ -74,16 +71,16 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		public void Create_PropertyTypeMissmatch_Exception()
 		{
 			var subject = new SingleBuilder();
-			PropertyInfo missmatch = C.Prop(nameof(C.TypeMismatch));
+			PropertyInfo missmatch = this.Property(nameof(TypeMismatch));
 
-			Assert.That(()=> subject.Create(missmatch, null), Throws.InstanceOf<FormatException>());
+			Assert.That(() => subject.Create(missmatch, null), Throws.InstanceOf<FormatException>());
 		}
 
 		[Test]
 		public void Create_CompatibleConversion_Instance()
 		{
 			var subject = new SingleBuilder();
-			PropertyInfo compatible = C.Prop(nameof(C.CompatibleConversion));
+			PropertyInfo compatible = this.Property(nameof(CompatibleConversion));
 			object instance = subject.Create(compatible, null);
 			Assert.That(instance, Is.InstanceOf(compatible.PropertyType));
 		}
@@ -92,7 +89,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		public void Create_ExactConversion_Instance()
 		{
 			var subject = new SingleBuilder();
-			PropertyInfo exact = C.Prop(nameof(C.ExactType));
+			PropertyInfo exact = this.Property(nameof(ExactType));
 			object instance = subject.Create(exact, null);
 			Assert.That(instance, Is.InstanceOf(exact.PropertyType));
 		}
