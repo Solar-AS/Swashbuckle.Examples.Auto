@@ -19,6 +19,12 @@ namespace Swashbuckle.Examples.Auto.Builders.Support
 			return isList;
 		}
 
+		public static bool IsArray(Type t)
+		{
+			bool isArray = t.IsArray;
+			return isArray;
+		}
+
 		public static bool IsNullable(Type t)
 		{
 			TypeInfo info = t.GetTypeInfo();

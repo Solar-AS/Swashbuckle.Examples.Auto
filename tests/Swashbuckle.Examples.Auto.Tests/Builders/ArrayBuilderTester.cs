@@ -9,12 +9,12 @@ using Swashbuckle.Examples.Auto.Tests.Builders.Support;
 namespace Swashbuckle.Examples.Auto.Tests.Builders
 {
 	[TestFixture]
-	public class ListBuilderTester
+	public class ArrayBuilderTester
 	{
 		[Test]
 		public void Create_NotAProperty_NoOp()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			object notAProperty = typeof(int);
 			var noOp = subject.Create(notAProperty, null);
 
@@ -29,28 +29,28 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		public List<int> NotDecorated { get; set; }
 
 		[Sample("a")]
-		public string Unhandled { get; set; }
+		public List<string> Unhandled { get; set; }
 
 		[Sample("a")]
-		public List<int> TypeMismatch { get; set; }
+		public int[] TypeMismatch { get; set; }
 
 		[Sample('a')]
-		public List<char> SingleItem { get; set; }
+		public char[] SingleItem { get; set; }
 
 		[Sample('a', 'b')]
-		public List<char> MultipleItems { get; set; }
+		public char[] MultipleItems { get; set; }
 
 		[Sample("1")]
-		public List<int> CompatibleSingleConversion { get; set; }
+		public int[] CompatibleSingleConversion { get; set; }
 
 		[Sample("1", "2")]
-		public List<int> CompatibleMultiConversion { get; set; }
+		public int[] CompatibleMultiConversion { get; set; }
 
 		[Sample]
-		public List<int> Empty { get; set; }
+		public int[] Empty { get; set; }
 
 		[Sample(1, 2, 3)]
-		public int[] Array { get; set; }
+		public List<int> List { get; set; }
 
 		// ReSharper restore MemberCanBePrivate.Global
 		// ReSharper restore UnusedMember.Global
@@ -60,7 +60,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_PropertyNotDecorated_NoOp()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 
 			PropertyInfo notDecorated = this.Property(nameof(NotDecorated));
 			var noOp = subject.Create(notDecorated, null);
@@ -71,7 +71,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_PropertyOfUnsupportedType_NoOp()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo unhandledType = this.Property(nameof(Unhandled));
 
 			var noOp = subject.Create(unhandledType, null);
@@ -82,7 +82,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_PropertyTypeMissmatch_Exception()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo missmatch = this.Property(nameof(TypeMismatch));
 
 			Assert.That(() => subject.Create(missmatch, null), Throws.InstanceOf<FormatException>());
@@ -91,25 +91,25 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_SingleItem_Instance()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo singleItem = this.Property(nameof(SingleItem));
 			object instance = subject.Create(singleItem, null);
-			Assert.That(instance, Is.InstanceOf(singleItem.PropertyType).And.Count.EqualTo(1));
+			Assert.That(instance, Is.InstanceOf(singleItem.PropertyType).And.Length.EqualTo(1));
 		}
 
 		[Test]
 		public void Create_MultipleItems_Instance()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo multipleItems = this.Property(nameof(MultipleItems));
 			object instance = subject.Create(multipleItems, null);
-			Assert.That(instance, Is.InstanceOf(multipleItems.PropertyType).And.Count.GreaterThan(1));
+			Assert.That(instance, Is.InstanceOf(multipleItems.PropertyType).And.Length.GreaterThan(1));
 		}
 
 		[Test]
 		public void Create_CompatibleSingleConversion_Instance()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo compatible = this.Property(nameof(CompatibleSingleConversion));
 			object instance = subject.Create(compatible, null);
 			Assert.That(instance, Is.InstanceOf(compatible.PropertyType));
@@ -118,7 +118,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_CompatibleMultiConversion_Instance()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo compatible = this.Property(nameof(CompatibleMultiConversion));
 			object instance = subject.Create(compatible, null);
 			Assert.That(instance, Is.InstanceOf(compatible.PropertyType));
@@ -127,21 +127,20 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_NoValues_EmptyInstance()
 		{
-			var subject = new ListBuilder();
+			var subject = new ArrayBuilder();
 			PropertyInfo empty = this.Property(nameof(Empty));
 			object instance = subject.Create(empty, null);
 			Assert.That(instance, Is.InstanceOf(empty.PropertyType).And.Empty);
 		}
 
 		[Test]
-		public void Create_Array_NoOp()
+		public void Create_List_NoOp()
 		{
-			var subject = new ListBuilder();
-			PropertyInfo array = this.Property(nameof(Array));
+			var subject = new ArrayBuilder();
+			PropertyInfo array = this.Property(nameof(List));
 			object noOp = subject.Create(array, null);
 
 			Assert.That(noOp, Is.InstanceOf<NoSpecimen>());
 		}
-
 	}
 }
