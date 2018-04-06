@@ -42,6 +42,9 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Sample("6")]
 		public DayOfWeek TextualNumericValue { get; set; }
 
+		[Sample]
+		public DayOfWeek NoValue { get; set; }
+
 		// ReSharper restore MemberCanBePrivate.Global
 		// ReSharper restore UnusedMember.Global
 		// ReSharper restore UnusedAutoPropertyAccessor.Global
@@ -102,6 +105,15 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 			var subject = new EnumBuilder();
 			PropertyInfo textualValue = this.Property(nameof(TextualNumericValue));
 			Assert.That(() => subject.Create(textualValue, null), Throws.ArgumentException);
+		}
+
+		[Test]
+		public void Create_NoValue_Default()
+		{
+			var subject = new EnumBuilder();
+			PropertyInfo noValue = this.Property(nameof(NoValue));
+			object instance = subject.Create(noValue, null);
+			Assert.That(instance, Is.EqualTo(default(DayOfWeek)));
 		}
 	}
 }
