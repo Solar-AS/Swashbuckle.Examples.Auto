@@ -23,5 +23,12 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 		protected abstract bool CanHandle(CustomAttributeData attribute, PropertyInfo property);
 		protected abstract object GetSampleValue(CustomAttributeData attribute, PropertyInfo property);
+
+		protected object sampleValue(CustomAttributeData attribute)
+		{
+			// regardless whether there is one or many arguments, it is always attribute.ConstructorArguments[0]
+			object sampleValue = attribute.ConstructorArguments[0].Value;
+			return sampleValue;
+		}
 	}
 }

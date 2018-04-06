@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using Swashbuckle.Examples.Auto.Builders.Support;
 
@@ -20,7 +19,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
 		{
-			object value = Convert.ChangeType(attribute.ConstructorArguments.First().Value, property.PropertyType);
+			object value = sampleValue(attribute).As(property.PropertyType);
 			return value;
 		}
 	}

@@ -10,7 +10,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 	{
 		protected override bool CanHandle(CustomAttributeData attribute, PropertyInfo property)
 		{
-			bool canHandle = Reflect.IsArray(property.PropertyType);
+			bool canHandle = property.PropertyType.IsArray;
 			return canHandle;
 		}
 
@@ -19,19 +19,19 @@ namespace Swashbuckle.Examples.Auto.Builders
 			Type arrayType = property.PropertyType.GetElementType();
 			Array array;
 
-			object sampleValue = attribute.ConstructorArguments.First().Value;
+			object value = sampleValue(attribute);
 
 			// multiple items
-			if (sampleValue is ReadOnlyCollection<CustomAttributeTypedArgument> collectionValue)
+			if (value is ReadOnlyCollection<CustomAttributeTypedArgument> collectionValue)
 			{
 				array = Array.CreateInstance(arrayType, collectionValue.Count);
-				Array.Copy(collectionValue.Select(v => Convert.ChangeType(v.Value, arrayType)).ToArray(), array, array.Length);
+				Array.Copy(collectionValue.Select(v => v.Value.As(arrayType)).ToArray(), array, array.Length);
 			}
 			// one item
 			else
 			{
 				array = Array.CreateInstance(arrayType, 1);
-				Array.Copy(new[] { Convert.ChangeType(sampleValue, arrayType) }, array, 1);
+				Array.Copy(new[] { value.As(arrayType) }, array, 1);
 			}
 
 			return array;

@@ -15,7 +15,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
 		{
-			object @enum = Enum.ToObject(property.PropertyType, attribute.ConstructorArguments.First().Value);
+			object @enum = Enum.ToObject(property.PropertyType, sampleValue(attribute));
 			return @enum;
 		}
 	}

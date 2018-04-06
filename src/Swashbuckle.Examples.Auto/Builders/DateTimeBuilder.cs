@@ -15,7 +15,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
 		{
-			string sortableDate = (string)attribute.ConstructorArguments.First().Value;
+			string sortableDate = (string)sampleValue(attribute);
 			DateTime value = DateTime.ParseExact(sortableDate, "s", CultureInfo.InvariantCulture);
 			return value;
 		}

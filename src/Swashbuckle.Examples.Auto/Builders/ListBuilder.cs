@@ -18,26 +18,24 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
 		{
-			var listType = typeof(List<>).MakeGenericType(property.PropertyType.GenericTypeArguments);
-			IList list = (IList)Activator.CreateInstance(listType);
-
-			Type generic = property.PropertyType.GenericTypeArguments.First();
-			object sampleValue = attribute.ConstructorArguments.First().Value;
+			Type typeOfList = property.PropertyType.GenericTypeArguments[0];
+			Type genericList = typeof(List<>).MakeGenericType(typeOfList);
+			IList list = (IList)Activator.CreateInstance(genericList);
+			
+			object value = sampleValue(attribute);
 
 			// a collection of multiple items
-			if (sampleValue is ReadOnlyCollection<CustomAttributeTypedArgument> collectionValue)
+			if (value is ReadOnlyCollection<CustomAttributeTypedArgument> collectionValue)
 			{
 				foreach (CustomAttributeTypedArgument o in collectionValue)
 				{
-					object typed = Convert.ChangeType(o.Value, generic);
-					list.Add(typed);
+					list.Add(o.Value.As(typeOfList));
 				}
 			}
 			// a collection of one item
 			else
 			{
-				object typed = Convert.ChangeType(sampleValue, generic);
-				list.Add(typed);
+				list.Add(value.As(typeOfList));
 			}
 
 			return list;

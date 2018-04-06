@@ -17,13 +17,10 @@ namespace Swashbuckle.Examples.Auto.Builders
 		{
 			Type underlying = Nullable.GetUnderlyingType(property.PropertyType);
 			Type nullableType = typeof(Nullable<>).MakeGenericType(underlying);
-			object argumentValue = attribute.ConstructorArguments.First().Value;
-			object value = null;
-			if (argumentValue != null)
-			{
-				object sample = Convert.ChangeType(argumentValue, underlying);
-				value = Activator.CreateInstance(nullableType, sample);
-			}
+			object argumentValue = sampleValue(attribute);
+			object value = argumentValue != null ?
+				Activator.CreateInstance(nullableType, argumentValue.As(underlying)) :
+				null;
 			return value;
 		}
 	}
