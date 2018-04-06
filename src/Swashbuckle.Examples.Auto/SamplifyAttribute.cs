@@ -6,21 +6,21 @@ namespace Swashbuckle.Examples.Auto
 	/// Specifies that the class should provide a sample in its documentation.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class, Inherited = false)]
-	public sealed class BuildSampleAttribute : Attribute
+	public sealed class SamplifyAttribute : Attribute
 	{
 		/// <summary>
-		/// Initializes an instance of <see cref="BuildSampleAttribute"/> with default properties.
+		/// Initializes an instance of <see cref="SamplifyAttribute"/> with default properties.
 		/// </summary>
 		/// <remarks>Use when the type of the sample to be provided corresponds to the decorated class.</remarks>
-		public BuildSampleAttribute() { }
+		public SamplifyAttribute() { }
 
 		/// <summary>
-		/// Initializes an instance of <see cref="BuildSampleAttribute"/> with a type.
+		/// Initializes an instance of <see cref="SamplifyAttribute"/> with a type.
 		/// </summary>
 		/// <param name="typeOfSample">The type of the sample to be provided.</param>
 		/// <remarks>Allows creating a different sample from the decorated class.</remarks>
 		/// <example>TODO </example>
-		public BuildSampleAttribute(Type typeOfSample)
+		public SamplifyAttribute(Type typeOfSample)
 		{
 			TypeOfSample = typeOfSample;
 		}
