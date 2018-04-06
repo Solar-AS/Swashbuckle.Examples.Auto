@@ -4,7 +4,7 @@ using AutoFixture.Kernel;
 
 namespace Swashbuckle.Examples.Auto.Builders
 {
-	public abstract class SampleBuilderBase
+	public abstract class SampleBuilderBase : ISpecimenBuilder
 	{
 		protected static readonly NoSpecimen NoOp = new NoSpecimen();
 

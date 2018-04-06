@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 
 namespace Swashbuckle.Examples.Auto.Builders
@@ -16,7 +15,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
 		{
 			string sortableDate = (string)sampleValue(attribute);
-			DateTimeOffset value = DateTimeOffset.ParseExact(sortableDate, "s", CultureInfo.InvariantCulture);
+			DateTimeOffset value = DateTimeOffset.ParseExact(sortableDate, "s", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
 			return value;
 		}
 	}

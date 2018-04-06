@@ -14,6 +14,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 			return canHandle;
 		}
 
+		// ReSharper disable AssignNullToNotNullAttribute
 		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
 		{
 			Type arrayType = property.PropertyType.GetElementType();
@@ -24,6 +25,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 			// multiple items
 			if (value is ReadOnlyCollection<CustomAttributeTypedArgument> collectionValue)
 			{
+				
 				array = Array.CreateInstance(arrayType, collectionValue.Count);
 				Array.Copy(collectionValue.Select(v => v.Value.As(arrayType)).ToArray(), array, array.Length);
 			}
@@ -36,5 +38,6 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 			return array;
 		}
+		// ReSharper restore AssignNullToNotNullAttribute
 	}
 }

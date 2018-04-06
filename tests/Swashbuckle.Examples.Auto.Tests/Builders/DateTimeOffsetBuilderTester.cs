@@ -74,8 +74,18 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 			var subject = new DateTimeOffsetBuilder();
 
 			PropertyInfo rightFormat = this.Property(nameof(RightFormat));
-			var notNull = subject.Create(rightFormat, null);
-			Assert.That(notNull, Is.InstanceOf(rightFormat.PropertyType));
+			var date = subject.Create(rightFormat, null);
+			Assert.That(date, Is.InstanceOf(rightFormat.PropertyType));
+		}
+
+		[Test]
+		public void Create_SortableFormat_Utc()
+		{
+			var subject = new DateTimeOffsetBuilder();
+
+			PropertyInfo rightFormat = this.Property(nameof(RightFormat));
+			var date = (DateTimeOffset)subject.Create(rightFormat, null);
+			Assert.That(date.Offset, Is.EqualTo(TimeSpan.Zero));
 		}
 	}
 }
