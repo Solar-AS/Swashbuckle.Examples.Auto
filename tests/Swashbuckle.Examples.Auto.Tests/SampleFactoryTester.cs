@@ -46,7 +46,7 @@ namespace Swashbuckle.Examples.Auto.Tests
 
 			[Sample(DayOfWeek.Friday)]
 			public DayOfWeek Enum { get; set; }
-			
+
 			[Sample("a", "b", "c")]
 			public string[] Array { get; set; }
 
@@ -150,8 +150,8 @@ namespace Swashbuckle.Examples.Auto.Tests
 
 			var built = (Subject)subject.BuildSample(typeof(Subject));
 
-			Assert.That(built.Array, Is.EqualTo(new[]{"a", "b", "c"}));
-			Assert.That(built.List, Is.EqualTo(new []{'1', '2', '3'}));
+			Assert.That(built.Array, Is.EqualTo(new[] { "a", "b", "c" }));
+			Assert.That(built.List, Is.EqualTo(new[] { '1', '2', '3' }));
 		}
 
 		[Test]
@@ -192,7 +192,7 @@ namespace Swashbuckle.Examples.Auto.Tests
 				f.RepeatCount = 2;
 			});
 
-			var built = (Subject) subject.BuildSample(typeof(Subject));
+			var built = (Subject)subject.BuildSample(typeof(Subject));
 
 			// all collections will contain two elements
 			Assert.That(built.Array, Has.Length.EqualTo(2));
@@ -204,7 +204,7 @@ namespace Swashbuckle.Examples.Auto.Tests
 				.With.Length.EqualTo(2));
 
 			// but sample attribute is not observed
-			Assert.That(built.Array, Is.Not.EqualTo(new[]{ "a", "b", "c" }));
+			Assert.That(built.Array, Is.Not.EqualTo(new[] { "a", "b", "c" }));
 		}
 
 		[Test]
@@ -218,14 +218,28 @@ namespace Swashbuckle.Examples.Auto.Tests
 				var indexOfArrayBuilder = f.Customizations.ToList().FindIndex(b => b is Auto.Builders.ArrayBuilder);
 				f.Customizations.RemoveAt(indexOfArrayBuilder);
 			};
-			
+
 			var subject = new SampleFactory(composed);
 
 			var built = (Subject)subject.BuildSample(typeof(Subject));
 
-			Assert.That(built.Scalar, Is.EqualTo('a'), ()=> "sample attribute should be observed");
+			Assert.That(built.Scalar, Is.EqualTo('a'), () => "sample attribute should be observed");
 
-			Assert.That(built.Array, Is.Not.EqualTo(new[] { "a", "b", "c" }), ()=> "sample attribute should not be observed for arrays");
+			Assert.That(built.Array, Is.Not.EqualTo(new[] { "a", "b", "c" }), () => "sample attribute should not be observed for arrays");
+		}
+
+		[Samplify(typeof(Subject[]))]
+		public class Proxy { }
+
+		[Test]
+		public void BuildSample_ProxyType_DifferentInstanceBuilt()
+		{
+			var subject = new SampleFactory();
+
+			var built = subject.BuildSample(typeof(Proxy));
+
+			Assert.That(built, Is.Not.InstanceOf<Proxy>()
+				.And.InstanceOf<Subject[]>());
 		}
 	}
 }
