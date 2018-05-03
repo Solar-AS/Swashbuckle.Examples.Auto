@@ -1,20 +1,44 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Web.Http;
+using Sample_net.Models;
 
 namespace Sample_net.Controllers
 {
 	public class MyController : ApiController
 	{
-		// GET api/<controller>
-		public IEnumerable<string> Get()
+		public IHttpActionResult Get()
 		{
-			return new string[] { "value1", "value2" };
+			var response = new MyResponse
+			{
+				Simple = 1f,
+				Complex = new ComplexOutput
+				{
+					C= 'a',
+					B= 1,
+					D= DateTimeOffset.UtcNow
+				}
+			};
+
+			return Ok(response);
 		}
 
-		// GET api/<controller>/5
-		public string Get(int id)
+		public IHttpActionResult Post([FromBody]MyRequest request)
 		{
-			return "value";
+			if (!float.TryParse(request.Simple, out float simple)) simple = 0f;
+			byte b = Convert.ToByte(request.Complex.I);
+			var response = new MyResponse
+			{
+				Simple = simple,
+				Complex = new ComplexOutput
+				{
+
+					C= request.Complex.C,
+					B= b,
+					D= DateTimeOffset.UtcNow
+				}
+			};
+
+			return Ok(response);
 		}
 	}
 }

@@ -90,6 +90,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComplexInput.cs" />
+    <Compile Include="Models\ComplexOutput.cs" />
+    <Compile Include="Models\MyRequest.cs" />
+    <Compile Include="Models\MyResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApiConfig.cs" />
   </ItemGroup>
