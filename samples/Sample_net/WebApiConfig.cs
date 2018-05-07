@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Formatting;
 using System.Web.Http;
+using Swashbuckle.Application;
+using Swashbuckle.Examples.Auto;
 
 namespace Sample_net
 {
@@ -15,6 +17,13 @@ namespace Sample_net
 			removeFormatters(
 				config.Formatters.FormUrlEncodedFormatter,
 				config.Formatters.XmlFormatter);
+
+			config.EnableSwagger(cfg =>
+			{
+				cfg.SingleApiVersion("v1", "My API");
+				var factory = new SampleFactory();
+				cfg.SchemaFilter(()=> new SchemaSamplifier(factory));
+			});
 		}
 
 		private static void removeFormatters(params MediaTypeFormatter[] formatters)
