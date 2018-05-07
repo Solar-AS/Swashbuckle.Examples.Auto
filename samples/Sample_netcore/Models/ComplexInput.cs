@@ -1,6 +1,6 @@
 ﻿using Swashbuckle.Examples.Auto;
 
-namespace Sample_net.Models
+namespace Sample_netcore.Models
 {
 	public class ComplexInput
 	{
