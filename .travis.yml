@@ -8,4 +8,4 @@ install:
 
 script:
 - sh build/travis-build.sh
-- dotnet test -f netcoreapp1.1 tests/Swashbuckle.Examples.Auto.Tests/Swashbuckle.Examples.Auto.Tests.csproj
+- sh build/travis-test.sh

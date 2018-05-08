@@ -1,1 +1,1 @@
-dotnet build -f netstandard1.6 src/Swashbuckle.Examples.Auto/Swashbuckle.Examples.Auto.csproj
+dotnet build -f netstandard1.6 -c Release src/Swashbuckle.Examples.Auto/Swashbuckle.Examples.Auto.csproj
