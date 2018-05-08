@@ -9,9 +9,11 @@ namespace Sample_netcore
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+	        var builder = new ConfigurationBuilder()
+		        .SetBasePath(env.ContentRootPath);
+	        Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }

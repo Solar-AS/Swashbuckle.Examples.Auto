@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 
 namespace Sample_netcore
 {
@@ -11,8 +10,9 @@ namespace Sample_netcore
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+			new WebHostBuilder()
+				.UseKestrel()
+				.UseStartup<Startup>()
                 .Build();
     }
 }
