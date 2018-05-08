@@ -7,5 +7,5 @@ install:
 - sh build/travis-install.sh
 
 script:
-- sh build/travis-buid.sh
+- sh build/travis-build.sh
 - sh build/travis-test.sh
