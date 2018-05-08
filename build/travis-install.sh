@@ -1,0 +1,1 @@
+dotnet restore -r netcoreapp1.1 Swashbuckle.Examples.Auto.sln

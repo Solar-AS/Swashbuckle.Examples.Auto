@@ -4,8 +4,8 @@ mono: none
 dotnet: 1.1.8
 
 install:
-- dotnet restore -r netcoreapp1.1 Swashbuckle.Examples.Auto.sln
+- sh build/travis-install.sh
 
 script:
-- dotnet build -r netcoreapp1.1 Swashbuckle.Examples.Auto.sln
-- dotnet test -r netcoreapp1.1 -f netcoreapp1.1 tests/Swashbuckle.Examples.Auto.Tests/Swashbuckle.Examples.Auto.Tests.csproj
+- sh build/travis-buid.sh
+- sh build/travis-test.sh
