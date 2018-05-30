@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using AutoFixture.Kernel;
 
@@ -20,9 +19,9 @@ namespace Swashbuckle.Examples.Auto.Builders
 
 			PropertyInfo property = request as PropertyInfo;
 			CustomAttributeData attribute = property?.CustomAttributes.FirstOrDefault(a => a.AttributeType == typeof(SampleAttribute));
-			if (attribute != null && CanHandle(attribute, property))
+			if (attribute != null && CanBuild(attribute, property))
 			{
-				value = GetSampleValue(attribute, property);
+				value = DoBuild(attribute, property);
 			}
 			return value;
 		}
@@ -33,15 +32,15 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
 		/// <returns><c>true</c> if the builder can be used to build the instance of the property, <c>false</c> otherwise</returns>
-		protected abstract bool CanHandle(CustomAttributeData attribute, PropertyInfo property);
+		protected abstract bool CanBuild(CustomAttributeData attribute, PropertyInfo property);
 
 		/// <summary>
 		/// Builds a suitable property value based on the value specified in the <see cref="SampleAttribute"/> attribute.
 		/// </summary>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
-		/// <returns>And instance of type of the property according to the value specified in the decoration.</returns>
-		protected abstract object GetSampleValue(CustomAttributeData attribute, PropertyInfo property);
+		/// <returns>An instance of type of the property according to the value specified in the decoration.</returns>
+		protected abstract object DoBuild(CustomAttributeData attribute, PropertyInfo property);
 
 		/// <summary>
 		/// Gets the value of the attribute.

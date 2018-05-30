@@ -6,13 +6,13 @@ namespace Swashbuckle.Examples.Auto.Builders
 {
 	public class NullableBuilder : SampleBuilderBase
 	{
-		protected override bool CanHandle(CustomAttributeData attribute, PropertyInfo property)
+		protected override bool CanBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
 			bool canHandle = Reflect.IsNullable(property.PropertyType);
 			return canHandle;
 		}
 
-		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
+		protected override object DoBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
 			Type underlying = Nullable.GetUnderlyingType(property.PropertyType);
 			Type nullableType = typeof(Nullable<>).MakeGenericType(underlying);

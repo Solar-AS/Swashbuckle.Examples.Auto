@@ -7,13 +7,13 @@ namespace Swashbuckle.Examples.Auto.Builders
 {
 	public class EnumBuilder : SampleBuilderBase
 	{
-		protected override bool CanHandle(CustomAttributeData attribute, PropertyInfo property)
+		protected override bool CanBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
 			bool canHandle = Reflect.IsEnum(property.PropertyType);
 			return canHandle;
 		}
 
-		protected override object GetSampleValue(CustomAttributeData attribute, PropertyInfo property)
+		protected override object DoBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
 			object value = sampleValue(attribute);
 
