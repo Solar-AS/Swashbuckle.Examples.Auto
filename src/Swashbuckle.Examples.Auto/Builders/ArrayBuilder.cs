@@ -8,12 +8,12 @@ namespace Swashbuckle.Examples.Auto.Builders
 {
 	
 	/// <summary>
-	/// Builds array properties given the values provided in the decorating <see cref="SampleAttribute"/> attribute.
+	/// Builds <see cref="Array"/> properties given the values provided in the decorating <see cref="SampleAttribute"/> attribute.
 	/// </summary>
 	public class ArrayBuilder : SampleBuilderBase
 	{
 		/// <summary>
-		/// Specifies whether a given builder can be used to create a property or not.
+		/// Specifies whether a given builder can be used to build a property or not.
 		/// </summary>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
