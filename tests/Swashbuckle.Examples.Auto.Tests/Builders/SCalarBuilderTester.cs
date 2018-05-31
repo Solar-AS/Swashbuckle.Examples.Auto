@@ -9,12 +9,12 @@ using Swashbuckle.Examples.Auto.Tests.Builders.Support;
 namespace Swashbuckle.Examples.Auto.Tests.Builders
 {
 	[TestFixture]
-	public class SingleBuilderTester
+	public class ScalarBuilderTester
 	{
 		[Test]
 		public void Create_NotAProperty_NoOp()
 		{
-			var subject = new SingleBuilder();
+			var subject = new ScalarBuilder();
 			object notAProperty = typeof(int);
 			var noOp = subject.Create(notAProperty, null);
 
@@ -48,7 +48,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_PropertyNotDecorated_NoOp()
 		{
-			var subject = new SingleBuilder();
+			var subject = new ScalarBuilder();
 
 			PropertyInfo notDecorated = this.Property(nameof(NotDecorated));
 			var noOp = subject.Create(notDecorated, null);
@@ -59,7 +59,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_PropertyOfUnsupportedType_NoOp()
 		{
-			var subject = new SingleBuilder();
+			var subject = new ScalarBuilder();
 			PropertyInfo unhandledType = this.Property(nameof(Unhandled));
 
 			var noOp = subject.Create(unhandledType, null);
@@ -70,7 +70,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_PropertyTypeMissmatch_Exception()
 		{
-			var subject = new SingleBuilder();
+			var subject = new ScalarBuilder();
 			PropertyInfo missmatch = this.Property(nameof(TypeMismatch));
 
 			Assert.That(() => subject.Create(missmatch, null), Throws.InstanceOf<FormatException>());
@@ -79,7 +79,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_CompatibleConversion_Instance()
 		{
-			var subject = new SingleBuilder();
+			var subject = new ScalarBuilder();
 			PropertyInfo compatible = this.Property(nameof(CompatibleConversion));
 			object instance = subject.Create(compatible, null);
 			Assert.That(instance, Is.InstanceOf(compatible.PropertyType));
@@ -88,7 +88,7 @@ namespace Swashbuckle.Examples.Auto.Tests.Builders
 		[Test]
 		public void Create_ExactConversion_Instance()
 		{
-			var subject = new SingleBuilder();
+			var subject = new ScalarBuilder();
 			PropertyInfo exact = this.Property(nameof(ExactType));
 			object instance = subject.Create(exact, null);
 			Assert.That(instance, Is.InstanceOf(exact.PropertyType));

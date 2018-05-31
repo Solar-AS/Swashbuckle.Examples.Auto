@@ -5,43 +5,43 @@ using Swashbuckle.Examples.Auto.Builders.Support;
 namespace Swashbuckle.Examples.Auto.Builders
 {
 	/// <summary>
-	/// Builds nullable properties given the value provided in the decorating <see cref="SampleAttribute"/> attribute.
+	/// Builds scalar properties given the value provided in the decorating <see cref="SampleAttribute"/> attribute.
 	/// </summary>
-	public class NullableBuilder : SampleBuilderBase
+	public class ScalarBuilder : SampleBuilderBase
 	{
 		/// <summary>
 		/// Specifies whether a given builder can be used to build a property or not.
 		/// </summary>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
-		/// <returns><c>true</c> if the property is nullable, <c>false</c> otherwise.</returns>
+		/// <returns><c>true</c> if the property is a simple scalar, <c>false</c> otherwise.</returns>
 		protected override bool CanBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
-			bool canBuild = Reflect.IsNullable(property.PropertyType);
+			bool canBuild = !property.PropertyType.IsArray &&
+							 !Reflect.IsList(property.PropertyType) &&
+							 !Reflect.IsEnum(property.PropertyType) &&
+							 !Reflect.IsNullable(property.PropertyType) &&
+							 property.PropertyType != typeof(DateTime) &&
+							 property.PropertyType != typeof(DateTimeOffset);
 			return canBuild;
 		}
 
 		/// <summary>
-		/// Builds a nullable based on the value specified in the <see cref="SampleAttribute"/> attribute.
+		/// Builds a scalar based on the value specified in the <see cref="SampleAttribute"/> attribute.
 		/// </summary>
 		/// <example>
-		/// [Sample(null)]
-		/// public char? Optional { get; set; }
+		/// [Sample("1")]
+		/// public int Compatible { get; set; }
 		///
-		/// [Sample('x')]
-		/// public char? AnotherOptional { get; set; }
+		/// [Sample('a')]
+		/// public char Scalar { get; set; }
 		/// </example>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
-		/// <returns>A nullable with the sample value.</returns>
+		/// <returns>A scalar with the sample value.</returns>
 		protected override object DoBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
-			Type underlying = Nullable.GetUnderlyingType(property.PropertyType);
-			Type nullableType = typeof(Nullable<>).MakeGenericType(underlying);
-			object argumentValue = sampleValue(attribute);
-			object value = argumentValue != null ?
-				Activator.CreateInstance(nullableType, argumentValue.As(underlying)) :
-				null;
+			object value = sampleValue(attribute).As(property.PropertyType);
 			return value;
 		}
 	}

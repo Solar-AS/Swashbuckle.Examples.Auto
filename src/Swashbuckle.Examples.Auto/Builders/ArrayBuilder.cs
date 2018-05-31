@@ -20,8 +20,8 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// <returns><c>true</c> if the property is an array, <c>false</c> otherwise.</returns>
 		protected override bool CanBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
-			bool canHandle = property.PropertyType.IsArray;
-			return canHandle;
+			bool canBuild = property.PropertyType.IsArray;
+			return canBuild;
 		}
 
 		/// <summary>

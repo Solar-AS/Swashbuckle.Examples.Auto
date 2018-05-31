@@ -17,21 +17,22 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// <returns><c>true</c> if the property is a <see cref="DateTime"/>, <c>false</c> otherwise.</returns>
 		protected override bool CanBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
-			bool canHandle = property.PropertyType == typeof(DateTime);
-			return canHandle;
+			bool canBuild = property.PropertyType == typeof(DateTime);
+			return canBuild;
 		}
 
 		/// <summary>
 		/// Builds an instant in time based on the value specified in the <see cref="SampleAttribute"/> attribute.
 		/// </summary>
-		/// <remarks>The value must be specified in the sortable (<c>"s"</c>) format.</remarks>
+		/// <remarks>The value must be specified in the sortable (<c>"s"</c>) format.
+		/// <para>The instance is returned as <see cref="DateTimeKind.Utc"/>.</para></remarks>
 		/// <example>
 		/// [SampleAttribute("2018-05-30T20:56:00")]
 		/// public DateTime MyDate { get; set; }
 		/// </example>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
-		/// <returns>An datetime instance with the sample values.</returns>
+		/// <returns>A <see cref="DateTime"/> instance with the sample value.</returns>
 		protected override object DoBuild(CustomAttributeData attribute, PropertyInfo property)
 		{
 			string sortableDate = (string)sampleValue(attribute);

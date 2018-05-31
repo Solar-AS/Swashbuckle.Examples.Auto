@@ -26,7 +26,7 @@ namespace Swashbuckle.Examples.Auto
 			fixture.Customizations.Add(new Builders.EnumBuilder());
 			fixture.Customizations.Add(new Builders.DateTimeBuilder());
 			fixture.Customizations.Add(new Builders.DateTimeOffsetBuilder());
-			fixture.Customizations.Add(new Builders.SingleBuilder());
+			fixture.Customizations.Add(new Builders.ScalarBuilder());
 		}
 
 		public object BuildSample(Type type)
