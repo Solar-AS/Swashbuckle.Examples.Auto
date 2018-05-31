@@ -1,8 +1,8 @@
 @SET config=Release
 
-dotnet restore -v q
+dotnet restore .\Swashbuckle.Examples.Auto.sln -v q
 
-dotnet build -c %config% -v q
+dotnet build .\Swashbuckle.Examples.Auto.sln -c %config% -v q
 
 dotnet test .\tests\Swashbuckle.Examples.Auto.Tests\Swashbuckle.Examples.Auto.Tests.csproj -c %config% -v q
 
