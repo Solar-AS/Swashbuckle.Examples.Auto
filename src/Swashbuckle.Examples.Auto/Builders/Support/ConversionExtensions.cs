@@ -2,7 +2,7 @@
 
 namespace Swashbuckle.Examples.Auto.Builders.Support
 {
-	public static class ConversionExtensions
+	internal static class ConversionExtensions
 	{
 		public static object As(this object value, Type convertionType)
 		{
