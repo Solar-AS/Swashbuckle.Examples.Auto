@@ -28,11 +28,13 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// <para>The instance is returned as UTC.</para>
 		/// </remarks>
 		/// <example>
+		/// <code>
 		/// [SampleAttribute(DayOfWeek.Saturday)]
 		/// public DayOfWeek OneDay { get; set; }
 		/// 
 		/// [SampleAttribute(6)]
 		/// public DayOfWeek AnotherDay { get; set; }
+		/// </code>
 		/// </example>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>

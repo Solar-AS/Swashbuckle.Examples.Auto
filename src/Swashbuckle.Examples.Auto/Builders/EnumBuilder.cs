@@ -28,8 +28,10 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// <remarks>The value must be specified either as an enum or as a numeric value
 		/// </remarks>
 		/// <example>
+		/// <code>
 		/// [SampleAttribute("2018-05-30T20:56:00")]
 		/// public DateTimeOffset OneDay { get; set; }
+		/// </code>
 		/// </example>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>

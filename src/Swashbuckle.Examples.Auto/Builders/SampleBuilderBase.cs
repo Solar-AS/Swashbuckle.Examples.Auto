@@ -10,7 +10,7 @@ namespace Swashbuckle.Examples.Auto.Builders
 	/// </summary>
 	public abstract class SampleBuilderBase : ISpecimenBuilder
 	{
-		protected static readonly NoSpecimen NoOp = new NoSpecimen();
+		private static readonly NoSpecimen NoOp = new NoSpecimen();
 
 		/// <inheritdoc />
 		public object Create(object request, ISpecimenContext context)

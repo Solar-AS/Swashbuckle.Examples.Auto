@@ -12,16 +12,31 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Swashbuckle.Examples.Auto
 {
+	/// <summary>
+	/// Enable generation of sample instances using a <see cref="SampleFactory"/> as an example of a model.
+	/// </summary>
 	public class SchemaSamplifier : ISchemaFilter
 	{
 		private readonly SampleFactory _factory;
 
+		/// <summary>
+		/// Creates an instance that uses the provided factory.
+		/// </summary>
+		/// <param name="factory">Factory instance.</param>
 		public SchemaSamplifier(SampleFactory factory)
 		{
 			_factory = factory;
 		}
 
 #if NET
+		/// <summary>
+		/// Modifies the schema for a given model so that it includes an example element
+		/// that contains controlled sample values.
+		/// </summary>
+		/// <remarks>If the type is not decorated with the <see cref="SamplifyAttribute"/>, the schema will not be modified.</remarks>
+		/// <param name="schema">The model to modify.</param>
+		/// <param name="schemaRegistry">The registry.</param>
+		/// <param name="type">The corresponding type to build.</param>
 		public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
 		{
 			object sample = _factory.BuildSample(type);
@@ -31,6 +46,13 @@ namespace Swashbuckle.Examples.Auto
 			}
 		}
 #else
+		/// <summary>
+		/// Modifies the schema for a given model so that it includes an example element
+		/// that contains controlled sample values.
+		/// </summary>
+		/// <remarks>If the type is not decorated with the <see cref="SamplifyAttribute"/>, the schema will not be modified.</remarks>
+		/// <param name="model">The model to modify.</param>
+		/// <param name="context">The context that contains the corresponding type to build.</param>
 		public void Apply(Schema model, SchemaFilterContext context)
 		{
 			object sample = _factory.BuildSample(context.SystemType);

@@ -25,11 +25,13 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// Builds a nullable based on the value specified in the <see cref="SampleAttribute"/> attribute.
 		/// </summary>
 		/// <example>
+		/// <code>
 		/// [Sample(null)]
 		/// public char? Optional { get; set; }
 		///
 		/// [Sample('x')]
 		/// public char? AnotherOptional { get; set; }
+		/// </code>
 		/// </example>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>

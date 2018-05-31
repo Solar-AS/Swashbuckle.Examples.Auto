@@ -30,11 +30,13 @@ namespace Swashbuckle.Examples.Auto.Builders
 		/// Builds a scalar based on the value specified in the <see cref="SampleAttribute"/> attribute.
 		/// </summary>
 		/// <example>
+		/// <code>
 		/// [Sample("1")]
 		/// public int Compatible { get; set; }
 		///
 		/// [Sample('a')]
 		/// public char Scalar { get; set; }
+		/// </code>
 		/// </example>
 		/// <param name="attribute">Attribute data of the decorated property.</param>
 		/// <param name="property">The <see cref="PropertyInfo"/> representing the decorated property.</param>
