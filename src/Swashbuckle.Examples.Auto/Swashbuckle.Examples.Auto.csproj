@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	<TargetFrameworks>netstandard1.6; net46</TargetFrameworks>
-	<Version>0.9</Version>
+	<Version>1.0</Version>
 	<Authors>Solar A/S</Authors>
 	<Company>Solar A/S</Company>
 	<Description>Allows populating the example property of a schema object in the output swagger with meaningful data, minimizing the work by providing attributes to decorate properties.</Description>
@@ -12,7 +12,7 @@
 	<RepositoryUrl>https://github.com/Solar-AS/Swashbuckle.Examples.Auto</RepositoryUrl>
 	<PackageTags>Swagger, Documentation, Web Api, Docs, Example, Sample</PackageTags>
 	<Copyright>2018, Solar Corporate</Copyright>
-	<AssemblyVersion>0.9.0.0</AssemblyVersion>
+	<AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
